@@ -22,33 +22,33 @@ namespace DemoApplication.Areas.Client.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("~/", Name = "client-home-index")]
-        [HttpGet("index")]
-        public async Task<IActionResult> IndexAsync([FromServices] IFileService fileService)
-        {
-            var model = new IndexViewModel
-            {
-                Books = await _dbContext.Books
-                .Select(b => new BookListItemViewModel(b.Id,
-                b.Title,
-                $"{b.Author.FirstName} {b.Author.LastName}",
-                b.Price,
-                fileService.GetFileUrl(b.ImageNameInFileSystem, Contracts.File.UploadDirectory.Book)))
-                .ToListAsync(),
-                Sliders = await _dbContext.Sliders.OrderBy(s => s.Order).Select(b => new SliderListItemViewModel(
-                    b.Title,
-                    b.Content,
-                    b.ButtonName,
-                    b.ButtonRedirectUrl,
-                    b.Order,
-                    fileService.GetFileUrl(b.ImageNameInFileSystem, UploadDirectory.Slider)
+        //[HttpGet("~/", Name = "client-home-index")]
+        //[HttpGet("index")]
+        //public async Task<IActionResult> IndexAsync([FromServices] IFileService fileService)
+        //{
+        //    var model = new IndexViewModel
+        //    {
+        //        Books = await _dbContext.Books
+        //        .Select(b => new BookListItemViewModel(b.Id,
+        //        b.Title,
+        //        $"{b.Author.FirstName} {b.Author.LastName}",
+        //        b.Price,
+        //        fileService.GetFileUrl(b.ImageNameInFileSystem, Contracts.File.UploadDirectory.Book)))
+        //        .ToListAsync(),
+        //        Sliders = await _dbContext.Sliders.OrderBy(s => s.Order).Select(b => new SliderListItemViewModel(
+        //            b.Title,
+        //            b.Content,
+        //            b.ButtonName,
+        //            b.ButtonRedirectUrl,
+        //            b.Order,
+        //            fileService.GetFileUrl(b.ImageNameInFileSystem, UploadDirectory.Slider)
 
-                    ))
-                .ToListAsync()
-            };
+        //            ))
+        //        .ToListAsync()
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         [HttpGet("contact")]
         public ActionResult Contact()
